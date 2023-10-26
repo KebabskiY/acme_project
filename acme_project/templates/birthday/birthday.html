@@ -1,12 +1,19 @@
 {% extends "base.html" %}
+{% load django_bootstrap5 %}
 
 {% block content %}
-  <form>
-    <table>
-      {{ form.as_p }}
-    </table>  
-    <input type="submit" value="Submit">
-  </form>  
+<div class="card col-4">
+  <img src="https://ih1.redbubble.net/image.3539809214.4144/st,small,845x845-pad,1000x1000,f8f8f8.jpg" class="card-img-top" alt="">
+  <div class="card-header">
+    Калькулятор ожидания дня рождения
+  </div>
+  <div class="card-body">
+    <form>
+      {% bootstrap_form form %}
+      {% bootstrap_button button_type="submit" content="Отправить" %}
+      </form>
+    </div>
+  </div>      
   {% with data=request.GET %}
     {% if form.is_valid %}
       <h2>Привет, {{ data.first_name }}</h2>
