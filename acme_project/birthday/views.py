@@ -1,7 +1,7 @@
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView
 )
-from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import BirthdayForm
 from .models import Birthday
@@ -12,16 +12,18 @@ class BirthdayMixin:
     model = Birthday
 
 
-class BirthdayCreateView(BirthdayMixin, CreateView):
+class BirthdayCreateView(LoginRequiredMixin, CreateView):
+    model = Birthday
     form_class = BirthdayForm
 
 
-class BirthdayUpdateView(BirthdayMixin, UpdateView):
+class BirthdayUpdateView(LoginRequiredMixin, UpdateView):
+    model = Birthday
     form_class = BirthdayForm
 
 
-class BirthdayDeleteView(BirthdayMixin, DeleteView):
-    pass
+class BirthdayDeleteView(LoginRequiredMixin, DeleteView):
+    model = Birthday
 
 
 class BirthdayListView(ListView):
